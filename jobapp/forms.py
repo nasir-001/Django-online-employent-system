@@ -30,12 +30,12 @@ class JobForm(forms.ModelForm):
         )        
         self.fields['location'].widget.attrs.update(
             {
-                'placeholder': 'eg : Bangladesh',
+                'placeholder': 'eg : Zaria',
             }
         )
         self.fields['salary'].widget.attrs.update(
             {
-                'placeholder': '$800 - $1200',
+                'placeholder': 'NGN1000 - NGN100,000',
             }
         )
         self.fields['tags'].widget.attrs.update(
