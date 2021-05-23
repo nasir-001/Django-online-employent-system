@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from datetime import datetime
 User = get_user_model()
 
 
@@ -26,6 +27,7 @@ class Job(models.Model):
     user = models.ForeignKey(User, related_name='Use', on_delete=models.CASCADE) 
     title = models.CharField(max_length=300)
     description = RichTextField()
+    document = models.FileField(upload_to='documents/', blank=False)
     tags = TaggableManager()
     location = models.CharField(max_length=300)
     job_type = models.CharField(choices=JOB_TYPE, max_length=1)
