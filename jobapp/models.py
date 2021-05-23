@@ -27,7 +27,6 @@ class Job(models.Model):
     user = models.ForeignKey(User, related_name='Use', on_delete=models.CASCADE) 
     title = models.CharField(max_length=300)
     description = RichTextField()
-    document = models.FileField(upload_to='documents/', blank=False)
     tags = TaggableManager()
     location = models.CharField(max_length=300)
     job_type = models.CharField(choices=JOB_TYPE, max_length=1)
@@ -49,7 +48,9 @@ class Applicant(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_now=True, auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now=True, auto_now_add=False)    
+    document = models.FileField(upload_to='documents/', blank=False)
+
 
 
     def __str__(self):
