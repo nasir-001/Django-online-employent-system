@@ -38,6 +38,7 @@
             <div>
               <span class="ml-0 mr-2 mb-2"><span class="icon-briefcase mr-2"></span><a href="{{ job.url }}">{{ job.company_name }}</a></span>
               <span class="m-2"><span class="icon-room mr-2"></span>{{ job.location }}</span>
+              <span class="m-2"><span class="icon-book mr-2"></span>{{ job.qualification }}</span>
               <span class="m-2"><span class="icon-clock-o mr-2"></span>
                 <span class="text-primary">
 
@@ -101,7 +102,7 @@
             <form action="{% url 'jobapp:apply-job' job.id %}" method="POST">
               {% csrf_token %}
               <input type="hidden" name="job" value="{{ job.id }}">
-
+              
               <input type="submit" class="btn btn-block btn-primary btn-md" value="Apply Now" />
             </form>
             {% endif %}
@@ -114,7 +115,7 @@
               {% csrf_token %}
               <input type="hidden" name="job" value="{{ job.id }}">
 
-              <input type="submit" class="btn btn-block btn-primary btn-md" value="Apply Now" />
+              <input type="submit" class="btn btn-block btn-primary btn-md" value="Apply Nows" />
             </form>
             {% endif %}
 
@@ -178,7 +179,6 @@
             <form action="{% url 'jobapp:apply-job' job.id %}" method="POST">
               {% csrf_token %}
               <input type="hidden" name="job" value="{{ job.id }}">
-
               <input type="submit" class="btn btn-block btn-primary btn-md" value="Apply Now" />
             </form>
           </div>

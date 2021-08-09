@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.http import Http404, HttpResponseRedirect
-
+from django.core.files.storage import FileSystemStorage
 from account.models import User
 from jobapp.forms import *
 from jobapp.models import *
@@ -32,7 +32,7 @@ def home_view(request):
         'page_obj': page_obj
     }
     return render(request, 'jobapp/index.html', context)
-
+ 
 
 def job_list_View(request):
     """
@@ -144,17 +144,15 @@ def search_result_view(request):
 
 
 @login_required(login_url=reverse_lazy('account:login'))
-@user_is_employee
 def apply_job_view(request, id):
 
-    form = JobApplyForm(request.POST or None)
+    form = JobApplyForm(request.POST, request.FILES or None)
 
     user = get_object_or_404(User, id=request.user.id)
     applicant = Applicant.objects.filter(user=user, job=id)
 
     if not applicant:
         if request.method == 'POST':
-
             if form.is_valid():
                 instance = form.save(commit=False)
                 instance.user = user
@@ -162,9 +160,7 @@ def apply_job_view(request, id):
 
                 messages.success(
                     request, 'You have successfully applied for this job!')
-                return redirect(reverse("jobapp:single-job", kwargs={
-                    'id': id
-                }))
+                return redirect(reverse("jobapp:file"))
 
         else:
             return redirect(reverse("jobapp:single-job", kwargs={

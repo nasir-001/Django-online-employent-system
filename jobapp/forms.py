@@ -15,6 +15,7 @@ class JobForm(forms.ModelForm):
         forms.ModelForm.__init__(self, *args, **kwargs)
         self.fields['title'].label = "Job Title :"
         self.fields['location'].label = "Job Location :"
+        self.fields['qualification'].label = "JQualification Type :"
         self.fields['salary'].label = "Salary :"
         self.fields['description'].label = "Job Description :"
         self.fields['tags'].label = "Tags :"
@@ -31,6 +32,11 @@ class JobForm(forms.ModelForm):
         self.fields['location'].widget.attrs.update(
             {
                 'placeholder': 'eg : Zaria',
+            }
+        )
+        self.fields['qualification'].widget.attrs.update(
+            {
+                'placeholder': 'eg : Degree',
             }
         )
         self.fields['salary'].widget.attrs.update(
@@ -67,6 +73,7 @@ class JobForm(forms.ModelForm):
         fields = [
             "title",
             "location",
+            "qualification",
             "job_type",
             "category",
             "salary",
@@ -111,8 +118,6 @@ class JobBookmarkForm(forms.ModelForm):
     class Meta:
         model = BookmarkJob
         fields = ['job']
-
-
 
 
 class JobEditForm(forms.ModelForm):

@@ -1,5 +1,8 @@
 from django.urls import path
 from jobapp import views
+from django.views.static import serve
+from django.conf import settings
+from django.conf.urls import url
 
 app_name = "jobapp"
 
@@ -21,6 +24,7 @@ urlpatterns = [
     path('dashboard/employer/applicant/<int:id>/', views.applicant_details_view, name='applicant-details'),
     path('dashboard/employer/delete/<int:id>/', views.delete_job_view, name='delete'),
     path('dashboard/employee/delete-bookmark/<int:id>/', views.delete_bookmark_view, name='delete-bookmark'),
+    url(r'^download/(?P<path>.*)$', serve, {'document_roo': settings.MEDIA_ROOT}),
 
 
 ]
